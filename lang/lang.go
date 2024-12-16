@@ -248,15 +248,17 @@ func (dict *Dict) Replace(names []string, value *string) bool {
 				return true
 			}
 		}
-	}
 
-	if v, has := dict.Global[val]; has {
-		*value = v
+		if v, has := dict.Global[val]; has {
+			*value = v
+			return true
+		}
+
+		*value = val
 		return true
 	}
 
-	*value = val
-	return true
+	return false
 }
 
 // ReplaceMatch replace the value in the dictionary
@@ -472,6 +474,11 @@ func (dict *Dict) ReplaceAll(widgets []string, ptr interface{}) error {
 	}
 
 	return nil
+}
+
+// PrintPool prints "pool" to the console
+func PrintPool() {
+    fmt.Println("pool")
 }
 
 func (dict *Dict) replaceString(widgets []string, ptr *string) bool {
